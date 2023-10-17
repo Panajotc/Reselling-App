@@ -28,17 +28,39 @@ function ImageInput({ imageUri, onChangeImage }) {
         { text: "No" },
       ]);
   };
+  // const selectImage = async () => {
+  //   try {
+  //     const result = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //       quality: 0.5,
+  //     });
+  //     if (!result.canceled) onChangeImage(result.uri);
+  //   } catch (error) {
+  //     console.log("error reading an image", error);
+  //   }
+  // };
+
   const selectImage = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 0.5,
       });
-      if (!result.canceled) onChangeImage(result.uri);
+
+      if (!result.canceled) {
+        // Use the first selected asset from the assets array
+        const selectedAsset = result.assets[0];
+
+        // Access the image URI from the selected asset
+        const imageUri = selectedAsset.uri;
+
+        onChangeImage(imageUri);
+      }
     } catch (error) {
-      console.log("error reading an image", error);
+      console.log("Error reading an image", error);
     }
   };
+
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.container}>
