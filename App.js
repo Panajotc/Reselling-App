@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Screen from "./app/assets/components/Screen";
 import { Button, Text } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import navigationTheme from "./app/assets/Navigation/navigationTheme";
 import AppNavigator from "./app/assets/Navigation/AppNavigator";
 import AuthNavigator from "./app/assets/Navigation/AuthNavigator";
+import AuthContext from "./app/assets/auth/context";
 
 const Link = () => {
   const navigation = useNavigation();
@@ -73,10 +74,14 @@ const TabNavigator = () => (
 );
 
 const App = () => {
+  const [user, setUser] = useState();
+
   return (
-    <NavigationContainer theme={navigationTheme}>
-      <AuthNavigator />
-    </NavigationContainer>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <NavigationContainer theme={navigationTheme}>
+        {user ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 };
 export default App;
