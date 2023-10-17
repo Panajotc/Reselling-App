@@ -8,6 +8,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import navigationTheme from "./app/assets/Navigation/navigationTheme";
 import AppNavigator from "./app/assets/Navigation/AppNavigator";
+import AuthNavigator from "./app/assets/Navigation/AuthNavigator";
 
 const Link = () => {
   const navigation = useNavigation();
@@ -74,7 +75,7 @@ const TabNavigator = () => (
 const App = () => {
   return (
     <NavigationContainer theme={navigationTheme}>
-      <AppNavigator />
+      <AuthNavigator />
     </NavigationContainer>
   );
 };
