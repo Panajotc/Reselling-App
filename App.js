@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Screen from "./app/assets/components/Screen";
-import { Button, Text } from "react-native";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign } from "@expo/vector-icons";
-import jwtDecode from "jwt-decode";
-// import { AppLoading } from "expo";
+import React, { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+
 import AppLoading from "expo-app-loading";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import navigationTheme from "./app/assets/Navigation/navigationTheme";
 import AppNavigator from "./app/assets/Navigation/AppNavigator";
 import AuthNavigator from "./app/assets/Navigation/AuthNavigator";
@@ -19,16 +13,15 @@ const App = () => {
   const [user, setUser] = useState();
   const [isReady, setIsReady] = useState(false);
 
-  const restoreToken = async () => {
-    const token = await authStorage.getToken();
-    if (!token) return;
-    setUser(jwtDecode(token));
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (user) setUser(user);
   };
 
   if (!isReady)
     return (
       <AppLoading
-        startAsync={restoreToken}
+        startAsync={restoreUser}
         onFinish={() => setIsReady(true)}
         onError={(error) => console.error("App loading error:", error)}
       />
