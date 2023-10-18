@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Screen from "./app/assets/components/Screen";
 import { Button, Text } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
+import jwtDecode from "jwt-decode";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import navigationTheme from "./app/assets/Navigation/navigationTheme";
 import AppNavigator from "./app/assets/Navigation/AppNavigator";
 import AuthNavigator from "./app/assets/Navigation/AuthNavigator";
 import AuthContext from "./app/assets/auth/context";
+import authStorage from "./app/assets/auth/storage";
 
 const Link = () => {
   const navigation = useNavigation();
@@ -75,6 +77,16 @@ const TabNavigator = () => (
 
 const App = () => {
   const [user, setUser] = useState();
+
+  const restoreToken = async () => {
+    const token = await authStorage.getToken();
+    if (!token) return;
+    setUser(jwtDecode(token));
+  };
+
+  useEffect(() => {
+    restoreToken();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
