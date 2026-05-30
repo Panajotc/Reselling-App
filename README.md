@@ -28,19 +28,19 @@ A mobile marketplace application built with React Native and Expo.
 ## Screenshots
 
 ### Welcome
-![Welcome Screen](screenshots_welcome.png)
+![Welcome Screen](screenshots_welcome.png.png)
 
 ### Login
-![Login Screen](screenshots_login.png)
+![Login Screen](screenshots_login.png.png)
 
 ### Register
-![Register Screen](screenshots_register.png)
+![Register Screen](screenshots_register.png.png)
 
 ### Listing Details
-![Listing Details](screenshots_listing_details.png)
+![Listing Details](screenshots_listing_details.png.png)
 
 ### Create Listing
-![Create Listing](screenshots_create_listing.png)
+![Create Listing](screenshots_create_listing.png.png)
 
 ## Installation
 
